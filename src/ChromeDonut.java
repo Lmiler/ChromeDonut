@@ -22,8 +22,8 @@ class ChromeDonut extends JPanel {
         setBackground(Color.lightGray);
         setFocusable(true);
 
-        donut = new Mob(Constants.donutX, Constants.donutY, Constants.donutWidth,
-                Constants.donutHeight, Images.runningDonut);
+        donut = new Mob(Constants.DONUT_X, Constants.DONUT_Y, Constants.DONUT_WIDTH,
+                Constants.DONUT_HEIGHT, Images.runningDonut);
 
         obstacles = new ArrayList<>();
 
@@ -43,7 +43,7 @@ class ChromeDonut extends JPanel {
     public void jump() {
         if (!isJumping && !gameOver && gameStarted) {
             isJumping = true;
-            Constants.velocityY = Constants.jumpStrength;
+            Constants.velocityY = Constants.JUMP_STRENGTH;
             donut.setIcon(Images.staticDonut);
         }
     }
@@ -54,7 +54,7 @@ class ChromeDonut extends JPanel {
         running = true;
         score = 0;
         Constants.velocityY = 0;
-        donut.setY(Constants.donutY);
+        donut.setY(Constants.DONUT_Y);
         donut.setIcon(Images.runningDonut);
         obstacles.clear();
         gameLoop();
@@ -101,14 +101,14 @@ class ChromeDonut extends JPanel {
             int chance = random.nextInt(1, 101);
             Mob obstacle;
             if (chance >= 75) {
-                obstacle = new Mob(Constants.obstacleX, Constants.obstacleY, Constants.obstacle3Width,
-                        Constants.obstacleHeight, Images.obstacle3Img);
+                obstacle = new Mob(Constants.OBSTACLE_X, Constants.OBSTACLE_Y, Constants.OBSTACLE_3_WIDTH,
+                        Constants.OBSTACLE_HEIGHT, Images.obstacle3Img);
             } else if (chance > 40) {
-                obstacle = new Mob(Constants.obstacleX, Constants.obstacleY, Constants.obstacle2Width,
-                        Constants.obstacleHeight, Images.obstacle2Img);
+                obstacle = new Mob(Constants.OBSTACLE_X, Constants.OBSTACLE_Y, Constants.OBSTACLE_2_WIDTH,
+                        Constants.OBSTACLE_HEIGHT, Images.obstacle2Img);
             } else {
-                obstacle = new Mob(Constants.obstacleX, Constants.obstacleY, Constants.obstacle1Width,
-                        Constants.obstacleHeight, Images.obstacle1Img);
+                obstacle = new Mob(Constants.OBSTACLE_X, Constants.OBSTACLE_Y, Constants.OBSTACLE_1_WIDTH,
+                        Constants.OBSTACLE_HEIGHT, Images.obstacle1Img);
             }
             obstacles.add(obstacle);
 
@@ -129,7 +129,7 @@ class ChromeDonut extends JPanel {
             }
         } catch (Exception e) {}
         g.setColor(Color.black);
-        g.setFont(new Font("Courier", Font.PLAIN, 30));
+        g.setFont(new Font("Courier", Font.PLAIN, 25));
         if (gameOver) {
             g.drawString("Game Over: " + score, Constants.SCORE_X_POSITION,
                     Constants.SCORE_Y_POSITION);
@@ -143,18 +143,18 @@ class ChromeDonut extends JPanel {
             g.drawString("HI " + highScore, Constants.SCORE_X_POSITION,
                     Constants.HIGH_SCORE_Y_POSITION);
             if (!gameStarted) {
-                g.drawString("Press SPACE or UP to play", Constants.INSTRUCTIONS_X_POSITION,
-                        Constants.INSTRUCTIONS_Y_POSITION);
+                g.drawString("Press SPACE or UP to start the game",
+                        Constants.INSTRUCTIONS_X_POSITION, Constants.INSTRUCTIONS_Y_POSITION);
             }
         }
     }
 
     public void move() {
-        Constants.velocityY += Constants.gravity;
+        Constants.velocityY += Constants.GRAVITY;
         donut.setY(donut.getY() + Constants.velocityY);
 
-        if (donut.getY() > Constants.donutY) {
-            donut.setY(Constants.donutY);
+        if (donut.getY() > Constants.DONUT_Y) {
+            donut.setY(Constants.DONUT_Y);
             Constants.velocityY = 0;
             isJumping = false;
             donut.setIcon(Images.runningDonut);
