@@ -53,6 +53,7 @@ class ChromeDonut extends JPanel {
         gameOver = false;
         running = true;
         score = 0;
+        increase = 0;
         Constants.velocityY = 0;
         donut.setY(Constants.DONUT_Y);
         donut.setIcon(Images.runningDonut);
